@@ -1,10 +1,16 @@
 {
-  "name": "kafka-consumer-reference",
+  "name": "@meherwerali/kafka-consumer-reference",
   "version": "0.1.0",
   "description": "A failure-aware TypeScript Kafka consumer with manual commits, dead-letter handling, and idempotent processing boundaries.",
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
   "files": [
     "lib/",
     "README.md",
@@ -16,8 +22,9 @@
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
     "verify": "npm run check && npm test && npm run build",
-    "start": "node dist/index.js",
-    "dev": "tsx src/index.ts"
+    "prepack": "npm run build",
+    "start": "node lib/main.js",
+    "dev": "tsx src/main.ts"
   },
   "keywords": [
     "kafka",
@@ -28,6 +35,17 @@
   ],
   "author": "Meherwer Ali",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeherwerAli/kafka-consumer-reference.git"
+  },
+  "homepage": "https://github.com/MeherwerAli/kafka-consumer-reference#readme",
+  "bugs": {
+    "url": "https://github.com/MeherwerAli/kafka-consumer-reference/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "engines": {
     "node": ">=22"
   },

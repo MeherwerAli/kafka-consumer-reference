@@ -57,6 +57,14 @@ npm run build
 npm start
 ```
 
+Release automation publishes the reusable library as [`@meherwerali/kafka-consumer-reference`](https://github.com/MeherwerAli/kafka-consumer-reference/pkgs/npm/kafka-consumer-reference) in GitHub Packages. Configure npm authentication outside the repository, then install it with:
+
+```bash
+npm install @meherwerali/kafka-consumer-reference --registry=https://npm.pkg.github.com
+```
+
+Each versioned GitHub Release also includes the npm tarball and its SHA-256 checksum.
+
 The default sink writes structured event summaries to standard output. Replace `ConsoleUpsertSink` with a database adapter whose write is an upsert keyed by `eventId`. The in-memory idempotency store is illustrative and does not survive restarts; use durable storage in a deployed service.
 
 ## Failure behavior

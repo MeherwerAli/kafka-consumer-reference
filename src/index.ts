@@ -1,33 +1,22 @@
-import { ConsoleUpsertSink, InMemoryIdempotencyStore } from "./adapters.js";
-import { loadConfig } from "./config.js";
-import { startConsumer } from "./runner.js";
-
-
-async function main(): Promise<void> {
-  const runningConsumer = await startConsumer(
-    loadConfig(),
-    new ConsoleUpsertSink(),
-    new InMemoryIdempotencyStore(),
-  );
-  let stopping = false;
-  const stop = async (signal: NodeJS.Signals): Promise<void> => {
-    if (stopping) {
-      return;
-    }
-    stopping = true;
-    console.log(JSON.stringify({ level: "info", action: "shutdown", signal }));
-    await runningConsumer.stop();
-  };
-
-  process.once("SIGINT", () => void stop("SIGINT"));
-  process.once("SIGTERM", () => void stop("SIGTERM"));
-}
-
-main().catch((error: unknown) => {
-  console.error(JSON.stringify({
-    level: "error",
-    action: "startup-failed",
-    error: error instanceof Error ? error.message : "unknown error",
-  }));
-  process.exitCode = 1;
-});
+export {
+  ConsoleUpsertSink,
+  InMemoryIdempotencyStore,
+  KafkaDeadLetterPublisher,
+} from "./adapters.js";
+export { processPartitionBatch } from "./batch.js";
+export type { BatchHooks } from "./batch.js";
+export { loadConfig } from "./config.js";
+export type { ConsumerConfig } from "./config.js";
+export { MessageProcessor } from "./processor.js";
+export { startConsumer } from "./runner.js";
+export type { RunningConsumer } from "./runner.js";
+export type {
+  DeadLetterPublisher,
+  DeadLetterRecord,
+  EventEnvelope,
+  EventSink,
+  IdempotencyStore,
+  MessageCoordinates,
+  ProcessingOutcome,
+} from "./types.js";
+export { InvalidEventError, parseEvent } from "./validation.js";
