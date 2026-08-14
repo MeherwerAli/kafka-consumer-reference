@@ -39,7 +39,7 @@ jobs:
           mkdir -p package-dist
           npm pack --pack-destination package-dist
       - name: Generate checksum
-        run: sha256sum package-dist/*.tgz > package-dist/SHA256SUMS.txt
+        run: cd package-dist && sha256sum *.tgz > SHA256SUMS.txt
       - name: Publish to GitHub Packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
