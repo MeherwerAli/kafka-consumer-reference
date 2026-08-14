@@ -18,13 +18,13 @@
     ".env.example"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "node init && tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
     "verify": "npm run check && npm test && npm run build",
     "prepack": "npm run build",
-    "start": "node lib/main.js",
-    "dev": "tsx src/main.ts"
+    "start": "node init && node lib/main.js",
+    "dev": "node init && tsx src/main.ts"
   },
   "keywords": [
     "kafka",
@@ -50,7 +50,9 @@
     "node": ">=22"
   },
   "dependencies": {
-    "kafkajs": "^2.2.4"
+    "dotenv": "^8.2.0",
+    "kafkajs": "^2.2.4",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
