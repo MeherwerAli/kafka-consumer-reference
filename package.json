@@ -18,13 +18,13 @@
     ".env.example"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "node api.js && tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
     "verify": "npm run check && npm test && npm run build",
     "prepack": "npm run build",
-    "start": "node lib/main.js",
-    "dev": "tsx src/main.ts"
+    "start": "node api.js && node lib/main.js",
+    "dev": "node api.js && tsx src/main.ts"
   },
   "keywords": [
     "kafka",
