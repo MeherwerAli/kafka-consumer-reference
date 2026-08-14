@@ -1,0 +1,42 @@
+{
+  "name": "kafka-consumer-reference",
+  "version": "0.1.0",
+  "description": "A failure-aware TypeScript Kafka consumer with manual commits, dead-letter handling, and idempotent processing boundaries.",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "verify": "npm run check && npm test && npm run build",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": [
+    "kafka",
+    "kafkajs",
+    "typescript",
+    "idempotency",
+    "dead-letter-queue"
+  ],
+  "author": "Meherwer Ali",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  }
+}
